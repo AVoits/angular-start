@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, Scroll} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
@@ -8,10 +8,11 @@ import {Subscription} from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewChecked {
+export class AppComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private fragment: string;
   public linkGroup: string[] = [];
+  public isScrolled = false;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router ) {
     this.activatedRoute.fragment.subscribe(fragment => { this.fragment = fragment; });
@@ -24,8 +25,16 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    try {
-      document.querySelector('#' + this.fragment).scrollIntoView({behavior: 'smooth'});
-    } catch (e) { }
+    const element = document.querySelector('#' + this.fragment);
+    element.scrollIntoView({behavior: 'smooth'});
+    this.isScrolled = true;
+    setTimeout(this.clearScroll, 1000);
+  }
+
+  ngOnDestroy(): void {}
+
+  private clearScroll() {
+    this.isScrolled = false;
+    window.location.hash = '';
   }
 }

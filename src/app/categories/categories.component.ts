@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-categories',
@@ -7,6 +7,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
   public categories: string[] = [];
+
+  @Input()
+  isScrolled: boolean;
 
   constructor() { }
 
