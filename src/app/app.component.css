@@ -1,0 +1,31 @@
+.mat-toolbar-row {
+  display: flex;
+}
+
+.main-menu {
+  margin: 0 30px;
+  display: flex;
+}
+
+.main-menu a {
+  display: block;
+  margin: 0 20px;
+  color: aliceblue;
+}
+
+.main-wrapper {
+  padding: 50px;
+}
+
+.test-links {
+  padding: 30px 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.test-links a {
+  display: block;
+  padding: 5px;
+  border: 1px dotted gray;
+  margin: 3px;
+}
